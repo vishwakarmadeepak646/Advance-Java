@@ -18,10 +18,6 @@ DCL - Data Control Language
 o Rollback : Reverts data changes
 o Savepoint : transaction demarcation.
 
-
-
-
-
 ------------------ DATA BASE --------------------
 
 1. SHOW DATABASES; (all databases show karta hai)
