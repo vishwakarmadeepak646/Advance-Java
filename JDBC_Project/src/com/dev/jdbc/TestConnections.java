@@ -26,6 +26,8 @@ public class TestConnections {
 		//Connection know as factory of statement.
 		Statement stmt = conn.createStatement();  //Creates a Statement object from the database connection to execute SQL queries in JDBC.
 		//Stmt gives two methods : 1.   .executeQuery(SQL) ;  --- It returns ResultSet AND 2. .executeUpdate(SQL); ---------It return int
+		
+		// Step 4: get ResultSet or get number of rows
 		ResultSet rs = stmt.executeQuery("select * from marksheet");
 		
 		while(rs.next()) {
