@@ -20,12 +20,15 @@ public class TestInsert {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, username, pwd);
+			conn.setAutoCommit(false);
+			
 			Statement stmt = conn.createStatement();
 			int i = stmt.executeUpdate(
-					"insert into db_connection values(6,'Radhe', 'Shyam', 'radhsyam@gmail.com','1997-09-05')");
+					"insert into db_connection values(9,'Kumar', 'Jain', 'kumar@gmail.com','1992-09-05')");
 
 			System.out.println(i + " Rows affected");
 			stmt.close();
+			conn.commit();
 
 		} catch (Exception e) {
 			conn.rollback();
