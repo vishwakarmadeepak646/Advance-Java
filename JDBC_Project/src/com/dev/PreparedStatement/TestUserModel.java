@@ -1,5 +1,6 @@
 package com.dev.PreparedStatement;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class TestUserModel {
@@ -7,6 +8,9 @@ public class TestUserModel {
 	public static void main(String[] args) throws Exception {
 
 		getAdd();
+
+		getUpdate();
+		getDelete();
 
 	}
 
@@ -25,6 +29,30 @@ public class TestUserModel {
 		UserModel um = new UserModel();
 		int i = um.add(bean);
 		System.out.println("Record inserted at id : " + i);
+	}
+
+	public static void getUpdate() throws Exception {
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
+		UserBean bean = new UserBean();
+		bean.setFirst_name("Kapil");
+		bean.setLast_name("Vishwakarma");
+		bean.setLogin("kapil@gmail.com");
+		bean.setPassword("kapil123");
+		bean.setDob(s.parse("2000-04-28"));
+		bean.setId(10);
+
+		UserModel um = new UserModel();
+		um.update(bean);
+	}
+
+	public static void getDelete() throws Exception {
+
+		UserBean bean = new UserBean();
+
+		bean.setId(11);
+
+		UserModel um = new UserModel();
+		um.delete(bean);
 	}
 
 }
