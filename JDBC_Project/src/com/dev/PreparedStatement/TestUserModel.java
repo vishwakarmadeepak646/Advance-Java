@@ -7,10 +7,12 @@ public class TestUserModel {
 
 	public static void main(String[] args) throws Exception {
 
-		getAdd();
-
-		getUpdate();
-		getDelete();
+		// getAdd();
+		// getUpdate();
+		// getDelete();
+		//getFindByPK();
+		//getFindByLogin();
+		getAuthentication();
 
 	}
 
@@ -55,4 +57,62 @@ public class TestUserModel {
 		um.delete(bean);
 	}
 
+	public static void getFindByPK() throws Exception {
+
+		UserBean bean = new UserBean();
+		UserModel um = new UserModel();
+
+		bean = um.FindByPK(2);
+
+		if (bean != null) {
+			System.out.print(bean.getID());
+			System.out.print("\t" + bean.getFirst_name());
+			System.out.print("\t" + bean.getLast_name());
+			System.out.print("\t" + bean.getLogin());
+			System.out.print("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+		}else {
+			System.out.println("Record Not Found");
+		}
+
+	}
+
+	public static void getFindByLogin() throws Exception {
+		UserBean bean = new UserBean();
+		UserModel u = new UserModel();
+		bean = u.FindByLogin("amit05");
+		
+		if(bean != null) {
+			System.out.print(bean.getID());
+			System.out.print("\t" + bean.getFirst_name());
+			System.out.print("\t" + bean.getLast_name());
+			System.out.print("\t" + bean.getLogin());
+			System.out.print("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+		}else {
+			System.out.println("Record Not Found");
+		}
+	}
+	
+	public static void getAuthentication() throws Exception{
+		
+		UserBean bean = new UserBean();
+		UserModel u = new UserModel();
+		
+		bean = u.authentication("vikas03", "vikas789");
+		
+		if(bean != null) {
+			System.out.print(bean.getID());
+			System.out.print("\t" + bean.getFirst_name());
+			System.out.print("\t" + bean.getLast_name());
+			System.out.print("\t" + bean.getLogin());
+			System.out.print("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+		}else {
+			System.out.println("Record Not Found");
+		}
+		
+		
+		
+	}
 }

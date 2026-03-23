@@ -3,6 +3,7 @@ package com.dev.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MarksheetModel {
@@ -100,4 +101,79 @@ public class MarksheetModel {
 			conn.close();
 		}
 	}
+
+	public MarksheetBean findByID(int id) throws Exception {
+
+		MarksheetBean bean = null;
+		Connection conn = null;
+
+		try {
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from Marksheet where rollNo = ?");
+
+			pstmt.setInt(1, id);
+
+			ResultSet r = pstmt.executeQuery();
+
+			while (r.next()) {
+
+				bean = new MarksheetBean();
+
+				bean.setRollNo(r.getInt(1));
+				bean.setName(r.getString(2));
+				bean.setPhy(r.getInt(3));
+				bean.setChm(r.getInt(4));
+				bean.setMaths(r.getInt(5));
+			}
+			pstmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+
+		return bean;
+	}
+	
+	public MarksheetBean findByName(String name) throws Exception {
+
+		MarksheetBean bean = null;
+		Connection conn = null;
+
+		try {
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from Marksheet where name = ?");
+
+			pstmt.setString(1, name);
+
+			ResultSet r = pstmt.executeQuery();
+
+			while (r.next()) {
+
+				bean = new MarksheetBean();
+
+				bean.setRollNo(r.getInt(1));
+				bean.setName(r.getString(2));
+				bean.setPhy(r.getInt(3));
+				bean.setChm(r.getInt(4));
+				bean.setMaths(r.getInt(5));
+			}
+			pstmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+
+		return bean;
+	}
+
 }

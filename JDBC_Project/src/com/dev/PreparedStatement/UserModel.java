@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserModel {
 
@@ -93,7 +95,7 @@ public class UserModel {
 
 			pstmt.close();
 			conn.commit();
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			conn.rollback();
@@ -101,6 +103,116 @@ public class UserModel {
 			conn.close();
 		}
 
+	}
+
+	public UserBean FindByPK(int id) throws Exception {
+
+		UserBean bean = null;
+		Connection conn = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where id = ?");
+
+			pstmt.setInt(1, id);
+
+			ResultSet r = pstmt.executeQuery();
+			
+			while (r.next()) {
+				bean = new UserBean();
+
+				bean.setId(r.getInt(1));
+				bean.setFirst_name(r.getString(2));
+				bean.setLast_name(r.getString(3));
+				bean.setLogin(r.getString(4));
+				bean.setPassword(r.getString(5));
+				bean.setDob(r.getDate(6));
+			}
+			
+			pstmt.close();
+
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return bean;
+	}
+
+	public UserBean FindByLogin(String login) throws Exception {
+		UserBean bean = null;
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ?");
+
+			pstmt.setString(1, login);
+
+			ResultSet r = pstmt.executeQuery();
+			
+			while (r.next()) {
+				bean = new UserBean();
+
+				bean.setId(r.getInt(1));
+				bean.setFirst_name(r.getString(2));
+				bean.setLast_name(r.getString(3));
+				bean.setLogin(r.getString(4));
+				bean.setPassword(r.getString(5));
+				bean.setDob(r.getDate(6));
+			}
+			
+			pstmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return bean;
+	}
+
+	public UserBean authentication(String login, String password) throws Exception {
+		UserBean bean = null;
+		Connection conn = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and password = ?");
+			pstmt.setString(1, login);
+			pstmt.setString(2, password);
+
+			ResultSet r = pstmt.executeQuery();
+
+			
+
+			while (r.next()) {
+				bean = new UserBean();
+
+				bean.setId(r.getInt(1));
+				bean.setFirst_name(r.getString(2));
+				bean.setLast_name(r.getString(3));
+				bean.setLogin(r.getString(4));
+				bean.setPassword(r.getString(5));
+				bean.setDob(r.getDate(6));
+
+			}
+			pstmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.close();
+		}
+
+		return bean;
 	}
 
 }
