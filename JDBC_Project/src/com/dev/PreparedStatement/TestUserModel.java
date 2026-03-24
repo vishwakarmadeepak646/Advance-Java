@@ -1,18 +1,21 @@
 package com.dev.PreparedStatement;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class TestUserModel {
 
 	public static void main(String[] args) throws Exception {
 
-		// getAdd();
+		 //getAdd();
 		// getUpdate();
 		// getDelete();
-		//getFindByPK();
-		//getFindByLogin();
-		getAuthentication();
+		// getFindByPK();
+		// getFindByLogin();
+		// getAuthentication();
+		getSearch();
 
 	}
 
@@ -21,7 +24,7 @@ public class TestUserModel {
 		UserBean bean = new UserBean();
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 
-		bean.setId(12);
+		bean.setId(14);
 		bean.setFirst_name("Deepak");
 		bean.setLast_name("Vishwakarma");
 		bean.setLogin("dkv@gmail.com");
@@ -71,7 +74,7 @@ public class TestUserModel {
 			System.out.print("\t" + bean.getLogin());
 			System.out.print("\t" + bean.getPassword());
 			System.out.println("\t" + bean.getDob());
-		}else {
+		} else {
 			System.out.println("Record Not Found");
 		}
 
@@ -81,38 +84,63 @@ public class TestUserModel {
 		UserBean bean = new UserBean();
 		UserModel u = new UserModel();
 		bean = u.FindByLogin("amit05");
-		
-		if(bean != null) {
+
+		if (bean != null) {
 			System.out.print(bean.getID());
 			System.out.print("\t" + bean.getFirst_name());
 			System.out.print("\t" + bean.getLast_name());
 			System.out.print("\t" + bean.getLogin());
 			System.out.print("\t" + bean.getPassword());
 			System.out.println("\t" + bean.getDob());
-		}else {
+		} else {
 			System.out.println("Record Not Found");
 		}
 	}
+
+	public static void getAuthentication() throws Exception {
+
+		UserBean bean = new UserBean();
+		UserModel u = new UserModel();
+
+		bean = u.authentication("vikas03", "vikas789");
+
+		if (bean != null) {
+			System.out.print(bean.getID());
+			System.out.print("\t" + bean.getFirst_name());
+			System.out.print("\t" + bean.getLast_name());
+			System.out.print("\t" + bean.getLogin());
+			System.out.print("\t" + bean.getPassword());
+			System.out.println("\t" + bean.getDob());
+		} else {
+			System.out.println("Record Not Found");
+		}
+
+	}
 	
-	public static void getAuthentication() throws Exception{
-		
+	public static void getSearch() throws Exception {
 		UserBean bean = new UserBean();
 		UserModel u = new UserModel();
 		
-		bean = u.authentication("vikas03", "vikas789");
+		//bean.setFirst_name("deepak"); //--> Here we can search with mentioned options like first/last Name and id
+		//bean.setLast_name("vish");
+		//bean.setId(3);				// if we don't use any of them then it will fetch all the coloumns
 		
-		if(bean != null) {
+		List<UserBean> list = u.search(bean);
+		
+		Iterator<UserBean> it = list.iterator();
+		
+		while(it.hasNext()) {
+			bean = it.next();
+			
 			System.out.print(bean.getID());
 			System.out.print("\t" + bean.getFirst_name());
-			System.out.print("\t" + bean.getLast_name());
-			System.out.print("\t" + bean.getLogin());
+			System.out.print("\t\t" + bean.getLast_name());
+			System.out.print("\t\t" + bean.getLogin());
 			System.out.print("\t" + bean.getPassword());
 			System.out.println("\t" + bean.getDob());
-		}else {
-			System.out.println("Record Not Found");
+			
+			
 		}
-		
-		
-		
 	}
+	
 }
