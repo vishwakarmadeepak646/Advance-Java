@@ -221,8 +221,8 @@ public class UserModel {
 		return bean;
 	}
 
-	public List search(UserBean bean) throws Exception {
-		
+	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
+
 		List<UserBean> list = new ArrayList<UserBean>();
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -244,6 +244,12 @@ public class UserModel {
 				sql.append(" and id = " + bean.getID());
 			}
 		}
+		
+		if(pageNo>0) { 		// Pagination
+			pageNo = (pageNo -1) * pageSize;
+			sql.append(" limit " + pageNo + " , " + pageSize);
+		}
+		
 		System.out.println("SQL query running now ------> " + sql.toString());
 
 		PreparedStatement pstmt = conn.prepareStatement(sql.toString()); // Convert object to string
@@ -260,6 +266,7 @@ public class UserModel {
 			bean.setPassword(rs.getString(5));
 			bean.setDob(rs.getDate(6));
 
+	
 			list.add(bean);
 		}
 

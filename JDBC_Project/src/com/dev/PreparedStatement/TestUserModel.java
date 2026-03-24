@@ -9,7 +9,7 @@ public class TestUserModel {
 
 	public static void main(String[] args) throws Exception {
 
-		 //getAdd();
+		// getAdd();
 		// getUpdate();
 		// getDelete();
 		// getFindByPK();
@@ -116,31 +116,32 @@ public class TestUserModel {
 		}
 
 	}
-	
+
 	public static void getSearch() throws Exception {
 		UserBean bean = new UserBean();
 		UserModel u = new UserModel();
-		
-		//bean.setFirst_name("deepak"); //--> Here we can search with mentioned options like first/last Name and id
-		//bean.setLast_name("vish");
-		//bean.setId(3);				// if we don't use any of them then it will fetch all the coloumns
-		
-		List<UserBean> list = u.search(bean);
-		
+
+		// bean.setFirst_name("deepak"); //--> Here we can search with mentioned options
+		// like first/last Name and id
+		// bean.setLast_name("vish");
+		// bean.setId(3); // if we don't use any of them then it will fetch all the
+		// coloumns
+
+		List<UserBean> list = u.search(bean, 2, 4);
+
 		Iterator<UserBean> it = list.iterator();
-		
-		while(it.hasNext()) {
+
+		while (it.hasNext()) {
 			bean = it.next();
-			
+
 			System.out.print(bean.getID());
 			System.out.print("\t" + bean.getFirst_name());
 			System.out.print("\t\t" + bean.getLast_name());
 			System.out.print("\t\t" + bean.getLogin());
 			System.out.print("\t" + bean.getPassword());
 			System.out.println("\t" + bean.getDob());
-			
-			
+
 		}
 	}
-	
+
 }
