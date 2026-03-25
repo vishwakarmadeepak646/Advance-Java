@@ -232,6 +232,7 @@ public class UserModel {
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1"); // SQL Injection 1=1 mean true
 
 		if (bean != null) {
+			
 			if (bean.getFirst_name() != null && bean.getFirst_name().length() > 0) {
 				sql.append(" and first_name like '" + bean.getFirst_name() + "%'");
 			}
@@ -244,12 +245,12 @@ public class UserModel {
 				sql.append(" and id = " + bean.getID());
 			}
 		}
-		
-		if(pageNo>0) { 		// Pagination
-			pageNo = (pageNo -1) * pageSize;
+
+		if (pageNo > 0) { // Pagination
+			pageNo = (pageNo - 1) * pageSize;
 			sql.append(" limit " + pageNo + " , " + pageSize);
 		}
-		
+
 		System.out.println("SQL query running now ------> " + sql.toString());
 
 		PreparedStatement pstmt = conn.prepareStatement(sql.toString()); // Convert object to string
@@ -266,7 +267,6 @@ public class UserModel {
 			bean.setPassword(rs.getString(5));
 			bean.setDob(rs.getDate(6));
 
-	
 			list.add(bean);
 		}
 

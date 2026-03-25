@@ -127,7 +127,7 @@ public class TestUserModel {
 		// bean.setId(3); // if we don't use any of them then it will fetch all the
 		// coloumns
 
-		List<UserBean> list = u.search(bean, 2, 4);
+		List<UserBean> list = u.search(bean, 3, 5);
 
 		Iterator<UserBean> it = list.iterator();
 

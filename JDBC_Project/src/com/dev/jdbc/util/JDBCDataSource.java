@@ -30,24 +30,17 @@ public final class JDBCDataSource {
 
 			// Set DS Properties
 
-			cpds.setDriverClass("com.mysql.jdbc.Driver");
-
-			cpds.setJdbcUrl("jdbc:mysql://localhost/st_adv_java");
-
+			cpds.setDriverClass("com.mysql.cj.jdbc.Driver");
+			cpds.setJdbcUrl("jdbc:mysql://localhost:3306/school");
 			cpds.setUser("root");
+			cpds.setPassword("root");
+			cpds.setMaxPoolSize(30);
+			cpds.setMinPoolSize(10);
+			cpds.setAcquireIncrement(10);
+			cpds.setInitialPoolSize(10);
 
-			cpds.setPassword("");
-
-			cpds.setInitialPoolSize(5);
-
-			cpds.setAcquireIncrement(5);
-
-			cpds.setMaxPoolSize(50);
-
-		} catch (PropertyVetoException e) {
-
+		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 
 	}
@@ -72,6 +65,7 @@ public final class JDBCDataSource {
 		try {
 			return getInstance().cpds.getConnection();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
