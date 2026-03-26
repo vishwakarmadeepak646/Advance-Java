@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComplaintTicketModel {
 
@@ -33,6 +35,7 @@ public class ComplaintTicketModel {
 		} catch (Exception e) {
 
 			e.printStackTrace();
+			conn.rollback();
 		} finally {
 			conn.close();
 		}
@@ -123,5 +126,61 @@ public class ComplaintTicketModel {
 			conn.close();
 		}
 		return bean;
+	}
+
+	public List search(ComplaintTicketBean bean, int pageNo, int pageSize) throws Exception {
+
+		List<ComplaintTicketBean> list = new ArrayList<ComplaintTicketBean>();
+		Connection conn = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project_module", "root", "root");
+
+			StringBuffer sql = new StringBuffer("select * from complaintticket where 1=1");
+
+			if (bean != null) {
+				if (bean.getStatus() != null && bean.getStatus().length() > 0) {
+					sql.append(" and getStatus like '" + bean.getStatus() + "%'");
+				}
+
+				if (bean.getIssueType() != null && bean.getIssueType().length() > 0) {
+					sql.append(" and  issueType like '" + bean.getIssueType() + "%'");
+				}
+
+				if (bean.getId() > 0) {
+					sql.append(" and id = " + bean.getId());
+				}
+			}
+
+			if (pageNo > 0) {
+				pageNo = (pageNo - 1) * pageSize;
+
+				sql.append(" limit " + pageNo + " , " + pageSize);
+			}
+			System.out.println("sql query running ----> " + sql.toString());
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				bean = new ComplaintTicketBean();
+
+				bean.setId(rs.getInt(1));
+				bean.setIssueType(rs.getString(2));
+				bean.setCreatedDate(rs.getDate(3));
+				bean.setStatus(rs.getString(4));
+				list.add(bean);
+			}
+			pstmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+
+		return list;
 	}
 }

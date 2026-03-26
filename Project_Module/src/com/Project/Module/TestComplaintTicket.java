@@ -2,6 +2,7 @@ package com.Project.Module;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,18 +10,19 @@ public class TestComplaintTicket {
 
 	public static void main(String[] args) throws Exception {
 
-		// getAdd();
+		 //getAdd();
 		// getUpdate();
 		// getDelete();
 
-		findbyPK();
+		// findbyPK();
+		getSearch();
 	}
 
 	public static void getAdd() throws Exception {
 		ComplaintTicketBean bean = new ComplaintTicketBean();
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 
-		bean.setId(13);
+		bean.setId(14);
 		bean.setIssueType("Network");
 		bean.setCreatedDate(s.parse("2026-02-01"));
 		bean.setStatus("Open");
@@ -36,7 +38,7 @@ public class TestComplaintTicket {
 		ComplaintTicketBean bean = new ComplaintTicketBean();
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 
-		bean.setId(1);
+		bean.setId(2);
 		bean.setIssueType("Network");
 		bean.setCreatedDate(s.parse("2026-02-01"));
 		bean.setStatus("Open");
@@ -50,7 +52,7 @@ public class TestComplaintTicket {
 	public static void getDelete() throws Exception {
 		ComplaintTicketBean bean = new ComplaintTicketBean();
 
-		bean.setId(1);
+		bean.setId(11);
 
 		ComplaintTicketModel c = new ComplaintTicketModel();
 		c.delete(bean);
@@ -72,4 +74,27 @@ public class TestComplaintTicket {
 		}
 		System.out.println("-----------------------");
 	}
+
+	public static void getSearch() throws Exception {
+		
+		ComplaintTicketBean bean = new ComplaintTicketBean();
+		ComplaintTicketModel c = new ComplaintTicketModel();
+		
+		List<ComplaintTicketBean> list = new ArrayList<ComplaintTicketBean>();
+
+		list = c.search(bean, 1, 5);
+
+		Iterator<ComplaintTicketBean> it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = it.next();
+			System.out.println(bean.getId());
+			System.out.println(bean.getIssueType());
+			System.out.println(bean.getCreatedDate());
+			System.out.println(bean.getStatus());
+			System.out.println("--------------");
+
+		}
+	}
+
 }
