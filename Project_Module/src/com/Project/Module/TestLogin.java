@@ -1,6 +1,5 @@
 package com.Project.Module;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,12 +8,13 @@ import java.util.List;
 public class TestLogin {
 
 	public static void main(String[] args) throws Exception {
-		// Add();
+		 Add();
 		// Update();
 		// Delete();
 		// FindByPK();
-		// getSearch();
-		FindbyLoginCode();
+		 
+		//getSearch();
+
 	}
 
 	public static void Add() throws Exception {
@@ -22,7 +22,7 @@ public class TestLogin {
 		LoginModel m = new LoginModel();
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 
-		bean.setId(2);
+		bean.setId(21);
 		bean.setLoginCode("LC002");
 		bean.setUserName("Amit");
 		bean.setLoginTime(s.parse("2026-03-02"));
@@ -41,7 +41,7 @@ public class TestLogin {
 
 		bean.setId(2);
 		bean.setLoginCode("LC002");
-		bean.setUserName("Kamal");
+		bean.setUserName("Ramal");
 		bean.setLoginTime(s.parse("2026-03-02"));
 		bean.setStatus("Active");
 
@@ -120,6 +120,8 @@ public class TestLogin {
 		List<LoginBean> list = new ArrayList<LoginBean>();
 
 		// bean.setUserName("r");
+		// bean.setLoginCode("LC005");
+		bean.setId(8);
 
 		list = m.search(bean, 1, 5);
 
