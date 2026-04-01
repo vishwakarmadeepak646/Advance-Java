@@ -10,17 +10,41 @@ import java.util.List;
 
 public class ComplaintModel {
 
+	public int nextPk() throws Exception {
+		int pk = 0;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_Module", "root", "root");
+
+		PreparedStatement pstmt = conn.prepareStatement("select max(id) from Complaint_Management");
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+
+			pk = rs.getInt(1);
+		}
+
+		return pk + 1;
+	}
+
 	public int add(ComplaintBean bean) throws Exception {
 		Connection conn = null;
+		
+		ComplaintBean exist = FindByEmail(bean.getEmail());
+		
+		if(exist != null) {
+			throw new Exception("This email id is already exist. Please add new mail id");
+		}
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_Module", "root", "root");
 			conn.setAutoCommit(false);
 
-			PreparedStatement pstmt = conn.prepareStatement("insert into Complaint_Management values(?, ?, ?, ? ,?, ?)");
+			PreparedStatement pstmt = conn
+					.prepareStatement("insert into Complaint_Management values(?, ?, ?, ? ,?, ?)");
 
-			pstmt.setInt(1, bean.getId());
+			pstmt.setInt(1, nextPk());
 			pstmt.setString(2, bean.getUser_name());
 			pstmt.setString(3, bean.getComplaint_type());
 			pstmt.setString(4, bean.getDescription());
@@ -103,7 +127,7 @@ public class ComplaintModel {
 		}
 
 	}
-	
+
 	public ComplaintBean FindByEmail(String email) throws Exception {
 		Connection conn = null;
 		ComplaintBean bean = null;
@@ -112,17 +136,17 @@ public class ComplaintModel {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_Module", "root", "root");
 			conn.setAutoCommit(false);
-			
+
 			PreparedStatement pstmt = conn.prepareStatement("select * from complaint_management where email = ? ");
-			
+
 			pstmt.setString(1, email);
-			
+
 			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				
+
+			while (rs.next()) {
+
 				bean = new ComplaintBean();
-			
+
 				bean.setId(rs.getInt(1));
 				bean.setUser_name(rs.getString(2));
 				bean.setComplaint_type(rs.getString(3));
@@ -130,7 +154,7 @@ public class ComplaintModel {
 				bean.setStatus(rs.getString(5));
 				bean.setEmail(rs.getString(6));
 			}
-			
+
 			conn.commit();
 			pstmt.close();
 
@@ -140,14 +164,14 @@ public class ComplaintModel {
 		} finally {
 			conn.close();
 		}
-		
+
 		return bean;
 	}
 
 	public List search(ComplaintBean bean, int PageNo, int PageSize) throws Exception {
 
 		List<ComplaintBean> list = new ArrayList<ComplaintBean>();
-		
+
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project_module", "root", "root");
 
@@ -169,10 +193,10 @@ public class ComplaintModel {
 				sql.append(" and status = '" + bean.getStatus() + "'");
 			}
 		}
-		
-		if(PageSize != 0 ) {
-			PageNo = (PageNo - 1) * PageSize ;
-			
+
+		if (PageSize != 0) {
+			PageNo = (PageNo - 1) * PageSize;
+
 			sql.append(" limit " + PageNo + " , " + PageSize);
 		}
 

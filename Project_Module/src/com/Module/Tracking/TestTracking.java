@@ -1,6 +1,5 @@
 package com.Module.Tracking;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,18 +7,18 @@ public class TestTracking {
 
 	public static void main(String[] args) throws Exception {
 
-		// getAdd();
+		getAdd();
 		// getUpdate();
 		// getDelete();
 		// getFindByPK();
-		getSearch();
+		// getSearch();
 	}
 
 	public static void getAdd() throws Exception {
 		TrackingBean bean = new TrackingBean();
 		TrackingModel m = new TrackingModel();
 
-		bean.setId(12);
+		bean.setId(m.nextPk());
 		bean.setNumber("TRK1012");
 		bean.setLocation("Sagar");
 		bean.setStatus("Shipped");
@@ -75,12 +74,12 @@ public class TestTracking {
 	public static void getSearch() throws Exception {
 		TrackingBean bean = new TrackingBean();
 		TrackingModel m = new TrackingModel();
-		
-//		bean.setStatus("s");
-//		bean.setLocation("D");
-		//bean.setId(5);
 
-		List<TrackingBean> list = m.search(bean, 1, 10);
+		bean.setStatus("s");
+		bean.setLocation("d");
+//		bean.setId(5);
+
+		List<TrackingBean> list = m.search(bean, 1, 5);
 
 		Iterator<TrackingBean> it = list.iterator();
 

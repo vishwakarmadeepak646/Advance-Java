@@ -4,10 +4,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrackingModel {
+	
+	public long nextPk() throws Exception {
+		long pk = 0;
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+		
+		PreparedStatement pstmt = conn.prepareStatement("select max(id) from tracking");
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			pk =rs.getLong(1);
+		}
+		
+		
+		
+		return pk+1;
+	}
 
 	public long add(TrackingBean bean) throws Exception {
 
@@ -25,7 +46,7 @@ public class TrackingModel {
 			conn.setAutoCommit(false);
 			PreparedStatement pstmt = conn.prepareStatement("insert into tracking values(?,?,?,?)");
 
-			pstmt.setLong(1, bean.getId());
+			pstmt.setLong(1, nextPk());
 			pstmt.setString(2, bean.getNumber());
 			pstmt.setString(3, bean.getLocation());
 			pstmt.setString(4, bean.getStatus());
