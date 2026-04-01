@@ -8,12 +8,12 @@ import java.util.List;
 public class TestLogin {
 
 	public static void main(String[] args) throws Exception {
-		 Add();
+		// Add();
 		// Update();
 		// Delete();
 		// FindByPK();
 		 
-		//getSearch();
+		getSearch();
 
 	}
 
@@ -22,7 +22,7 @@ public class TestLogin {
 		LoginModel m = new LoginModel();
 		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
 
-		bean.setId(21);
+		bean.setId(22);
 		bean.setLoginCode("LC002");
 		bean.setUserName("Amit");
 		bean.setLoginTime(s.parse("2026-03-02"));
@@ -121,7 +121,7 @@ public class TestLogin {
 
 		// bean.setUserName("r");
 		// bean.setLoginCode("LC005");
-		bean.setId(8);
+		//bean.setId(8);
 
 		list = m.search(bean, 1, 5);
 

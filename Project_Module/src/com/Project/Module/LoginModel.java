@@ -13,6 +13,12 @@ public class LoginModel {
 	public long add(LoginBean bean) throws Exception {
 
 		Connection conn = null;
+		
+		LoginBean exist = FindbyLoginCode(bean.getLoginCode());
+		
+		if(exist != null) {
+			throw new Exception("LoginCode already exists");
+		}
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -195,7 +201,7 @@ public class LoginModel {
 				if (bean.getLoginCode() != null && bean.getLoginCode().length() > 0) {
 					sql.append(" and loginCode  like '" + bean.getLoginCode() + "%'");
 				}
-				if (bean.getId() != 0 & bean.getId() > 0) {
+				if (bean.getId() != 0 && bean.getId() > 0) {
 					sql.append(" and id = " + bean.getId());
 				}
 			}
