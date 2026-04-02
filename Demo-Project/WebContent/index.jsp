@@ -19,6 +19,7 @@
 
 		<h1 style="font-size: 50px">
 			<a href="WelcomeCtl">Online Result System</a>
+			
 	</div>
 	<%@ include file="Footer.jsp"%>
 </body>
