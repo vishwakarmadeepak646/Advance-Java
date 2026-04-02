@@ -47,9 +47,12 @@ public class UserRegistrationCtl extends HttpServlet {
 			bean.setPassword(password);
 			bean.setDob(sdf.parse(dob));
 			model.add(bean);
+			
+			request.setAttribute("successMsg", "User register successfully");
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.setAttribute("errorMsg", e.getMessage());
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("UserRegistrationView.jsp");

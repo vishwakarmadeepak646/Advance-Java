@@ -13,18 +13,20 @@ import com.dev.util.JDBCDataSource;
 
 public class UserModel {
 
+	Connection conn = null;
+
 	public int nextPk() throws Exception {
 
 		int pk = 0;
 
-		Connection conn = JDBCDataSource.getConnection();
+		conn = JDBCDataSource.getConnection();
 
 		PreparedStatement pstmt = conn.prepareStatement("select max(id) from st_user");
 
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
-			
+
 			pk = rs.getInt(1);
 		}
 
@@ -41,9 +43,7 @@ public class UserModel {
 		}
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+			conn = JDBCDataSource.getConnection();
 
 			PreparedStatement pstmt = conn.prepareStatement("insert into st_user values(?,?,?,?,?,?)");
 			conn.setAutoCommit(false);
@@ -75,8 +75,7 @@ public class UserModel {
 		Connection conn = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+			conn = JDBCDataSource.getConnection();
 			conn.setAutoCommit(false);
 
 			PreparedStatement pstmt = conn.prepareStatement(
@@ -109,9 +108,7 @@ public class UserModel {
 		Connection conn = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+			conn = JDBCDataSource.getConnection();
 
 			PreparedStatement pstmt = conn.prepareStatement("delete from st_user where id = ?");
 			conn.setAutoCommit(false);
@@ -139,10 +136,7 @@ public class UserModel {
 		Connection conn = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
-
+			conn = JDBCDataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where id = ?");
 
 			pstmt.setInt(1, id);
@@ -162,7 +156,7 @@ public class UserModel {
 
 			pstmt.close();
 
-		} catch (ClassNotFoundException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 		} finally {
@@ -175,9 +169,7 @@ public class UserModel {
 		UserBean bean = null;
 		Connection conn = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+			conn = JDBCDataSource.getConnection();
 
 			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ?");
 
@@ -211,9 +203,7 @@ public class UserModel {
 		Connection conn = null;
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+			conn = JDBCDataSource.getConnection();
 
 			PreparedStatement pstmt = conn.prepareStatement("select * from st_user where login = ? and password = ?");
 			pstmt.setString(1, login);
@@ -245,9 +235,7 @@ public class UserModel {
 
 		List<UserBean> list = new ArrayList<UserBean>();
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
+		conn = JDBCDataSource.getConnection();
 
 		StringBuffer sql = new StringBuffer("select * from st_user where 1=1"); // SQL Injection 1=1 mean true
 

@@ -7,16 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="Header.jsp"%>
-<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div align="center">
-		<h1 style="color: red; font-size: 50px">Welcome to online result system</h1>
-	</div>
-	<%@ include file = "Footer.jsp" %>
+
+	
+	<a href="WelcomeCtl">Welcome</a>
+	<hr>
 </body>
 </html>

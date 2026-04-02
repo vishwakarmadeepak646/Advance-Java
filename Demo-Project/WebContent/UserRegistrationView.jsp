@@ -8,9 +8,22 @@
 </head>
 <body>
 
+	<%
+	String successMsg = (String) request.getAttribute("successMsg");
+	String errorMsg = (String) request.getAttribute("errorMsg");
+	%>
+
+
+
+	<%@ include file="Header.jsp"%>
 	<div align="center">
 		<h1>User Registration</h1>
-
+		
+		
+		<h3 style = "color: green"><%=  successMsg != null ? successMsg : "" %></h3>
+		<h3 style = "color:red"> <%= errorMsg != null ? errorMsg : "" %> </h3>
+		
+		
 		<form action="UserRegistrationCtl" method="post">
 
 			<table>
@@ -52,7 +65,8 @@
 			</table>
 
 		</form>
-		
-		</div>
+
+	</div>
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

@@ -8,7 +8,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JDBCDataSource {
 
-
 	// JDBC Datasource static object
 
 	private static JDBCDataSource jdbc = null;
@@ -16,7 +15,7 @@ public class JDBCDataSource {
 	// C3P0 database connection pool
 
 	private ComboPooledDataSource cpds = null;
-	
+
 	private static ResourceBundle rb = ResourceBundle.getBundle("com.dev.bundle.System");
 
 	// Make default constructor private
@@ -70,7 +69,5 @@ public class JDBCDataSource {
 			return null;
 		}
 	}
-
-	
 
 }
