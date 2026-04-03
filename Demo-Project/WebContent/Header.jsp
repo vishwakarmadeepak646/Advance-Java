@@ -18,8 +18,8 @@
 	%>
 	<h1><%="Hii, " + userBean.getFirst_name()  %></h1>
 	
-	<a href="#">Add User</a> |
-	<a href="#">User List</a> |
+	<a href="UserCtl"> Add User</a> |
+	<a href="UserListCtl">User List</a> |
 	<a href="LoginCtl?operation=logout">Logout</a> 
 	<%
 	} else {
