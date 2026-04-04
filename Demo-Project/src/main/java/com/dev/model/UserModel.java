@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.dev.bean.UserBean;
+import com.dev.exception.DuplicateRecodExcepiton;
 import com.dev.util.JDBCDataSource;
 
 public class UserModel {
@@ -39,7 +40,7 @@ public class UserModel {
 		UserBean exist = FindByLogin(bean.getLogin());
 
 		if (exist != null) {
-			throw new Exception("Login already exists");
+			throw new DuplicateRecodExcepiton("Login already exists");
 		}
 
 		try {

@@ -7,29 +7,31 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body align="left">
+
+
 
 	<%
 	UserBean userBean = (UserBean) session.getAttribute("user");
 	%>
-	
+
 	<%
 	if (userBean != null) {
 	%>
-	<h1><%="Hii, " + userBean.getFirst_name()  %></h1>
-	
+	<h1><%="Hii, " + userBean.getFirst_name()%></h1>
+
 	<a href="UserCtl"> Add User</a> |
 	<a href="UserListCtl">User List</a> |
-	<a href="LoginCtl?operation=logout">Logout</a> 
+	<a href="LoginCtl?operation=logout">Logout</a>
 	<%
 	} else {
 	%>
 
 	<h3>Hii, Guest</h3>
-	
-	<a href="UserRegistrationCtl">  User Registration |</a>
+
+	<a href="UserRegistrationCtl"> User Registration |</a>
 	<a href="LoginCtl"> User Login | </a>
-		<%
+	<%
 	}
 	%>
 	<a href="WelcomeCtl "> Welcome </a>
