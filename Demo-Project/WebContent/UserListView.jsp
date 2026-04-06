@@ -14,6 +14,10 @@
 	List<UserBean> list = (List) request.getAttribute("list");
 	int pageNo = (int) request.getAttribute("pageNo");
 	Iterator<UserBean> it = list.iterator();
+	
+	
+	String successMsg = (String)request.getAttribute("successMsg");
+	String errorMsg = (String)request.getAttribute("errorMsg");
 	%>
 
 
@@ -22,6 +26,11 @@
 		<h1>User List</h1>
 
 		<form action="UserListCtl" method="post">
+		
+	<h2><%=successMsg != null ? successMsg : ""%></h2>
+	<h2><%= errorMsg != null ? errorMsg : "" %></h2>
+	
+
 
 			<%
 			if (list.size() == 0) {
@@ -31,12 +40,12 @@
 			<%
 			} else {
 			%>
-			<input type="text" name="pageNo" value="<%=pageNo%>">
+			<input type="hidden" name="pageNo" value="<%=pageNo%>">
 
 			<div align="center">
 				<table width="100%" border="1px">
 					<tr style="background-color: skyblue">
-
+						<th>Select</th>
 						<th>Id</th>
 						<th>First Name</th>
 						<th>Last Name</th>
@@ -49,6 +58,8 @@
 						UserBean bean = it.next();
 					%>
 					<tr align="center" style="background-color: #D3D3D3;">
+
+						<td><input type="checkbox" name="ids" value=<%=bean.getID()%>></td>
 						<td><%=bean.getID()%></td>
 						<td><%=bean.getFirst_name()%></td>
 						<td><%=bean.getLast_name()%></td>
@@ -66,6 +77,10 @@
 					<tr>
 						<td><input type="submit" name="operation"
 							<%=pageNo == 1 ? "disabled" : ""%> value="previous"></td>
+							
+							<td><input type="submit" name="operation"
+							value="delete"></td>
+							
 						<td align="right"><input type="submit" name="operation"
 							<%=list.size() < 10 ? "disabled" : ""%> value="next"></td>
 					</tr>
