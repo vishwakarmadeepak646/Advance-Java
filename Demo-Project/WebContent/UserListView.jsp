@@ -14,10 +14,9 @@
 	List<UserBean> list = (List) request.getAttribute("list");
 	int pageNo = (int) request.getAttribute("pageNo");
 	Iterator<UserBean> it = list.iterator();
-	
-	
-	String successMsg = (String)request.getAttribute("successMsg");
-	String errorMsg = (String)request.getAttribute("errorMsg");
+
+	String successMsg = (String) request.getAttribute("successMsg");
+	String errorMsg = (String) request.getAttribute("errorMsg");
 	%>
 
 
@@ -26,10 +25,10 @@
 		<h1>User List</h1>
 
 		<form action="UserListCtl" method="post">
-		
-	<h2><%=successMsg != null ? successMsg : ""%></h2>
-	<h2><%= errorMsg != null ? errorMsg : "" %></h2>
-	
+
+			<h2 style="color: green"><%=successMsg != null ? successMsg : ""%></h2>
+			<h2 style="color: red"><%=errorMsg != null ? errorMsg : ""%></h2>
+
 
 
 			<%
@@ -41,6 +40,26 @@
 			} else {
 			%>
 			<input type="hidden" name="pageNo" value="<%=pageNo%>">
+
+			<div align="center">
+				<table>
+					<tr>
+						<th>First Name</th>
+						<td><input type="text" name="firstName"
+							value="<%= request.getParameter("firstName") != null ? request.getParameter("firstName") : ""%>"
+							placeholder="search by firstName"></td>
+
+						<th>Last Name</th>
+						<td><input type="text" name="lastName"
+							value="<%=request.getParameter("lastName") != null ? request.getParameter("lastName") : ""%>"
+							placeholder="search by lastName"></td>
+							
+							<td><input type="submit" name ="operation" value="search"></td>
+
+					</tr>
+				</table>
+
+			</div>
 
 			<div align="center">
 				<table width="100%" border="1px">
@@ -77,10 +96,9 @@
 					<tr>
 						<td><input type="submit" name="operation"
 							<%=pageNo == 1 ? "disabled" : ""%> value="previous"></td>
-							
-							<td><input type="submit" name="operation"
-							value="delete"></td>
-							
+
+						<td><input type="submit" name="operation" value="delete"></td>
+
 						<td align="right"><input type="submit" name="operation"
 							<%=list.size() < 10 ? "disabled" : ""%> value="next"></td>
 					</tr>

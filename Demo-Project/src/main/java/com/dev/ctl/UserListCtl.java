@@ -62,7 +62,7 @@ public class UserListCtl extends HttpServlet {
 					deletebean.setId(Integer.parseInt(id));
 					try {
 						model.delete(deletebean);
-						request.setAttribute("successMsg", "records deleted successfully");
+						request.setAttribute("successMsg", "Records deleted successfully");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -81,6 +81,11 @@ public class UserListCtl extends HttpServlet {
 		if (op.equals("previous")) {
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			pageNo--;
+		}
+		
+		if(op.equals("search")){
+			bean.setFirst_name(request.getParameter("firstName"));
+			bean.setLast_name(request.getParameter("lastName"));
 		}
 
 		try {
