@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dev.bean.UserBean;
 import com.dev.model.UserModel;
 
-@WebServlet("/UserListCtl")
+@WebServlet("/UserListCtl.do")
 public class UserListCtl extends HttpServlet {
 
 	@Override

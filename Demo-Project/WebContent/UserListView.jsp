@@ -27,7 +27,7 @@
 	<div align="center">
 		<h1>User List</h1>
 
-		<form action="UserListCtl" method="post">
+		<form action="UserListCtl.do" method="post">
 
 			<h2 style="color: green"><%=successMsg != null ? successMsg : ""%></h2>
 			<h2 style="color: red"><%=errorMsg != null ? errorMsg : ""%></h2>
@@ -89,7 +89,7 @@
 						<td><%=bean.getLogin()%></td>
 						<td><%=bean.getPassword()%></td>
 						<td><%=bean.getDob()%></td>
-						<td><a href="UserCtl?id=<%=bean.getID()%>">Edit</a></td>
+						<td><a href="UserListCtl.do?id=<%=bean.getID()%>">Edit</a></td>
 					</tr>
 					<%
 					}
