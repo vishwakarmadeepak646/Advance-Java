@@ -28,8 +28,11 @@ public class UserListCtl extends HttpServlet {
 
 		try {
 			List<UserBean> list = model.search(bean, pageNo, pageSize);
+			List<UserBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
+
 			request.setAttribute("pageNo", pageNo);
 			request.setAttribute("list", list);
+			request.setAttribute("Nextlist", Nextlist);
 
 		} catch (Exception e) {
 
@@ -67,7 +70,7 @@ public class UserListCtl extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
-			}else {
+			} else {
 				request.setAttribute("errorMsg", "Select atleast one record");
 			}
 
@@ -82,16 +85,20 @@ public class UserListCtl extends HttpServlet {
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			pageNo--;
 		}
-		
-		if(op.equals("search")){
+
+		if (op.equals("search")) {
 			bean.setFirst_name(request.getParameter("firstName"));
 			bean.setLast_name(request.getParameter("lastName"));
 		}
 
 		try {
 			List<UserBean> list = model.search(bean, pageNo, pageSize);
+			List<UserBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
+
 			request.setAttribute("list", list);
+			request.setAttribute("Nextlist", Nextlist);
 			request.setAttribute("pageNo", pageNo);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

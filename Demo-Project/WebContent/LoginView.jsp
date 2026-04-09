@@ -8,10 +8,10 @@
 </head>
 <body>
 
-<%
-String successMsg = (String) request.getAttribute("successMsg");
-String errorMsg = (String)request.getAttribute("errorMsg");
-%>
+	<%
+	String successMsg = (String) request.getAttribute("successMsg");
+	String errorMsg = (String) request.getAttribute("errorMsg");
+	%>
 
 	<%@ include file="Header.jsp"%>
 
@@ -21,29 +21,27 @@ String errorMsg = (String)request.getAttribute("errorMsg");
 			<table>
 
 				<h3>User Login</h3>
-				<h4 style="color: green"><%= successMsg != null ? successMsg : "" %></h3>
-				<h4 style="color:red"><%= errorMsg != null ? errorMsg : "" %>
-				
-				<tr>
-					<th>Login :</th>
-					<td><input type="email" name="login" value=""
-						placeholder="Enter your email id"></td>
-				</tr>
+				<h4 style="color: green"><%=successMsg != null ? successMsg : ""%></h3>
+					<h4 style="color: red"><%=errorMsg != null ? errorMsg : ""%>
+
+						<tr>
+							<th>Login :</th>
+							<td><input type="email" name="login" value=""
+								placeholder="Enter your email id"></td>
+						</tr>
 
 
-				<tr>
-					<th>Password :</th>
-					<td><input type="password" name="password" value=""
-						placeholder="Enter your password"></td>
-				</tr>
+						<tr>
+							<th>Password :</th>
+							<td><input type="password" name="password" value=""
+								placeholder="Enter your password"></td>
+						</tr>
 
-				<tr>
-					<td><input type="submit" name="operation" value="Sign In">
-					</td>
-				</tr>
-
-
-
+						<tr>
+						<th></th>
+							<td><input type="submit" name="operation" value="Sign In">
+							</td>
+						</tr>
 			</table>
 		</form>
 	</div>

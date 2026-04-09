@@ -12,6 +12,9 @@
 
 	<%
 	List<UserBean> list = (List) request.getAttribute("list");
+
+	List<UserBean> Nextlist = (List) request.getAttribute("Nextlist");
+
 	int pageNo = (int) request.getAttribute("pageNo");
 	Iterator<UserBean> it = list.iterator();
 
@@ -34,8 +37,8 @@
 			<%
 			if (list.size() == 0) {
 			%>
-			<h1 style="color: red">Record Not found</h1>
-			<input type="submit" name="operation" value="back">
+			<!--  	<h1 style="color: red">Record Not found</h1>
+			<input type="submit" name="operation" value="back">-->
 			<%
 			} else {
 			%>
@@ -46,15 +49,15 @@
 					<tr>
 						<th>First Name</th>
 						<td><input type="text" name="firstName"
-							value="<%= request.getParameter("firstName") != null ? request.getParameter("firstName") : ""%>"
+							value="<%=request.getParameter("firstName") != null ? request.getParameter("firstName") : ""%>"
 							placeholder="search by firstName"></td>
 
 						<th>Last Name</th>
 						<td><input type="text" name="lastName"
 							value="<%=request.getParameter("lastName") != null ? request.getParameter("lastName") : ""%>"
 							placeholder="search by lastName"></td>
-							
-							<td><input type="submit" name ="operation" value="search"></td>
+
+						<td><input type="submit" name="operation" value="search"></td>
 
 					</tr>
 				</table>
@@ -71,6 +74,7 @@
 						<th>Login</th>
 						<th>Password</th>
 						<th>DOB</th>
+						<th>Edit</th>
 					</tr>
 					<%
 					while (it.hasNext()) {
@@ -85,6 +89,7 @@
 						<td><%=bean.getLogin()%></td>
 						<td><%=bean.getPassword()%></td>
 						<td><%=bean.getDob()%></td>
+						<td><a href="UserCtl?id=<%=bean.getID()%>">Edit</a></td>
 					</tr>
 					<%
 					}
@@ -100,7 +105,7 @@
 						<td><input type="submit" name="operation" value="delete"></td>
 
 						<td align="right"><input type="submit" name="operation"
-							<%=list.size() < 10 ? "disabled" : ""%> value="next"></td>
+							<%=Nextlist.size() == 0 ? "disabled" : ""%> value="next"></td>
 					</tr>
 				</table>
 			</div>

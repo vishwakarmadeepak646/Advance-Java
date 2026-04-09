@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,58 +7,71 @@
 <title>Add User Page</title>
 </head>
 <body>
-<%
+	<%
 	String successMsg = (String) request.getAttribute("successMsg");
 	String errorMsg = (String) request.getAttribute("errorMsg");
+	UserBean bean = (UserBean) request.getAttribute("bean");
 	%>
 
 
 
 	<%@ include file="Header.jsp"%>
 	<div align="center">
-		<h1>Add User</h1>
-		
-		
-		<h3 style = "color: green"><%=  successMsg != null ? successMsg : "" %></h3>
-		<h3 style = "color:red"> <%= errorMsg != null ? errorMsg : "" %> </h3>
-		
-		
+		<!-- 	<h1>Add User</h1>  -->
+
+		<h1><%=bean != null ? "Update User" : "Add User"%></h1>
+
+		<h3 style="color: green"><%=successMsg != null ? successMsg : ""%></h3>
+		<h3 style="color: red">
+			<%=errorMsg != null ? errorMsg : ""%>
+		</h3>
+
+
 		<form action="UserCtl" method="post">
+
+			<input type="hidden" name="id"
+				value="<%=bean != null ? bean.getID() : ""%>">
 
 			<table>
 
 				<tr>
 					<th>First Name :</th>
-					<td><input type="text" name="firstName" value=""
+					<td><input type="text" name="firstName"
+						value="<%=bean != null ? bean.getFirst_name() : ""%>"
 						placeholder="enter first name"></td>
 				</tr>
 
 				<tr>
 					<th>Last Name :</th>
-					<td><input type="text" name="lastName" value=""
+					<td><input type="text" name="lastName"
+						value="<%=bean != null ? bean.getLast_name() : ""%>"
 						placeholder="enter last name"></td>
 				</tr>
 
 				<tr>
 					<th>Login :</th>
-					<td><input type="email" name="login" value=""
+					<td><input type="email" name="login"
+						value="<%=bean != null ? bean.getLogin() : ""%>"
 						placeholder="enter your login"></td>
 				</tr>
 
 				<tr>
 					<th>Password :</th>
-					<td><input type="password" name="password" value=""
+					<td><input type="password" name="password"
+						value="<%=bean != null ? bean.getPassword() : ""%>"
 						placeholder="enter your login"></td>
 				</tr>
 
 				<tr>
 					<th>DOB :</th>
-					<td><input type="date" name="dob" value=""></td>
+					<td><input type="date" name="dob"
+						value="<%=bean != null ? bean.getDob() : ""%>"></td>
 				</tr>
 
 				<tr>
 					<th></th>
-					<td><input type="submit" name="operation" value="save"></td>
+					<td><input type="submit" name="operation"
+						value="<%=bean != null ? "update" : "save"%>"></td>
 				</tr>
 
 			</table>
