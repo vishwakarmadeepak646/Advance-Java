@@ -73,6 +73,7 @@ public class UserCtl extends HttpServlet {
 			}
 
 		} catch (Exception e) {
+			System.out.println("Inside catch block");
 			e.printStackTrace();
 			request.setAttribute("errorMsg", e.getMessage());
 		}
