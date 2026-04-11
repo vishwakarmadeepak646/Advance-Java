@@ -31,6 +31,7 @@ public class ExportModel {
 	public void add(ExportBean bean) throws Exception {
 
 		Connection conn = null;
+		
 
 		try {
 
@@ -38,7 +39,6 @@ public class ExportModel {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_module", "root", "root");
 			conn.setAutoCommit(false);
 			PreparedStatement pstmt = conn.prepareStatement("insert into export values(?,?,?,?,?)");
-
 			pstmt.setLong(1, FindbyPk());
 			pstmt.setString(2, bean.getCode());
 			pstmt.setString(3, bean.getFileName());
