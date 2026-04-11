@@ -9,25 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackingModel {
-	
+
 	public long nextPk() throws Exception {
 		long pk = 0;
-		
+
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "root");
-		
+
 		PreparedStatement pstmt = conn.prepareStatement("select max(id) from tracking");
-		
+
 		ResultSet rs = pstmt.executeQuery();
-		
-		while(rs.next()) {
-			
-			pk =rs.getLong(1);
+
+		while (rs.next()) {
+
+			pk = rs.getLong(1);
 		}
-		
-		
-		
-		return pk+1;
+
+		return pk + 1;
 	}
 
 	public long add(TrackingBean bean) throws Exception {
