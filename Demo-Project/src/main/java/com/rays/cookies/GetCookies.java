@@ -16,8 +16,9 @@ public class GetCookies extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Cookie[] c = req.getCookies();
+		
 
-		for (int i = 1; i < c.length; i++) {
+		for (int i = 0; i < c.length; i++) {
 
 			Cookie cu = c[i];
 			
