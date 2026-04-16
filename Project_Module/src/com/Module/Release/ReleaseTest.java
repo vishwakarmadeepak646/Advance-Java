@@ -9,9 +9,10 @@ import java.util.List;
 public class ReleaseTest {
 
 	public static void main(String[] args) throws Exception {
-		getAdd();
+		// getAdd();
 		// getUpdate();
 		// getDelete();
+		getFindByPk();
 		// getSearch();
 	}
 
@@ -59,6 +60,26 @@ public class ReleaseTest {
 		bean.setStatus("approved");
 
 		m.delete(bean);
+
+	}
+
+	public static void getFindByPk() throws Exception {
+
+		ReleaseBean bean = new ReleaseBean();
+		ReleaseModel m = new ReleaseModel();
+		bean = m.findByPk(4);
+
+		if (bean != null) {
+			System.out.println(bean.getId());
+			System.out.println(bean.getCode());
+			System.out.println(bean.getVersion());
+			System.out.println(bean.getDate());
+			System.out.println(bean.getStatus());
+			System.out.println("----------------------");
+
+		} else {
+			System.out.println("No Record found");
+		}
 
 	}
 

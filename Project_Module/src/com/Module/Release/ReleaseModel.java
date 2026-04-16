@@ -129,6 +129,40 @@ public class ReleaseModel {
 
 	}
 
+	public ReleaseBean findByPk( long id) throws Exception {
+		Connection conn = null;
+		ReleaseBean bean = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_module", "root", "root");
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from release_info where id = ?");
+
+			pstmt.setLong(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				bean = new ReleaseBean();
+				
+				bean.setId(rs.getLong(1));
+				bean.setCode(rs.getString(2));
+				bean.setVersion(rs.getString(3));
+				bean.setDate(rs.getDate(4));
+				bean.setStatus(rs.getString(5));
+			}
+
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return bean;
+
+	}
+
 	public List search(ReleaseBean bean, int pageNo, int pageSize) throws Exception {
 
 		Connection conn = null;
