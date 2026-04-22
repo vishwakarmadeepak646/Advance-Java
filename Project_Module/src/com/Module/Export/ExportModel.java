@@ -47,7 +47,7 @@ public class ExportModel {
 
 			int i = pstmt.executeUpdate();
 
-			System.out.println(i + "row inserted in table");
+			System.out.println(i + " row inserted in table");
 
 			conn.commit();
 			pstmt.close();
