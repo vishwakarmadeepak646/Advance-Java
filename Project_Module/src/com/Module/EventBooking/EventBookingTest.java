@@ -8,12 +8,12 @@ import java.util.List;
 public class EventBookingTest {
 
 	public static void main(String[] args) throws Exception {
-		// getAdd();
+		 getAdd();
 		// getUpdate();
 		// getDelete();
 		// findByPK();
 		// testfindByDate() ;
-		search();
+		//search();
 	}
 
 	public static void getAdd() throws Exception {

@@ -31,7 +31,7 @@ public class JDBCDataSource {
 			// Set DS Properties
 
 			cpds.setDriverClass("com.mysql.cj.jdbc.Driver");
-			cpds.setJdbcUrl("jdbc:mysql://localhost:3306/school");
+			cpds.setJdbcUrl("jdbc:mysql://localhost:3306/project_module");
 			cpds.setUser("root");
 			cpds.setPassword("root");
 			cpds.setMaxPoolSize(30);
