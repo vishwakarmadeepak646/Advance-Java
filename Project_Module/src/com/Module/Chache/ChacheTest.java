@@ -7,7 +7,7 @@ import java.util.List;
 public class ChacheTest {
 
 	public static void main(String[] args) {
-		 getAdd();
+		// getAdd();
 		// getUpdate();
 		// getDelete();
 		// findByPK();
