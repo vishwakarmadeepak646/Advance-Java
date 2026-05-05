@@ -29,10 +29,10 @@ public class ComplaintModel {
 
 	public int add(ComplaintBean bean) throws Exception {
 		Connection conn = null;
-		
+
 		ComplaintBean exist = FindByEmail(bean.getEmail());
-		
-		if(exist != null) {
+
+		if (exist != null) {
 			throw new Exception("This email id is already exist. Please add new mail id");
 		}
 
@@ -107,11 +107,9 @@ public class ComplaintModel {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_Module", "root", "root");
 			conn.setAutoCommit(false);
 
-			PreparedStatement pstmt = conn
-					.prepareStatement("delete from Complaint_Management where id = ? and status = ?");
+			PreparedStatement pstmt = conn.prepareStatement("delete from Complaint_Management where id = ?");
 
 			pstmt.setInt(1, bean.getId());
-			pstmt.setString(2, bean.getStatus());
 
 			int i = pstmt.executeUpdate();
 			System.out.println(i + " Record Deleted from DB");
@@ -126,6 +124,46 @@ public class ComplaintModel {
 			conn.close();
 		}
 
+	}
+
+	public ComplaintBean FindByPk(int id) throws Exception {
+		Connection conn = null;
+		ComplaintBean bean = null;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_Module", "root", "root");
+			conn.setAutoCommit(false);
+
+			PreparedStatement pstmt = conn.prepareStatement("select * from complaint_management where id = ? ");
+
+			pstmt.setInt(1, id);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				bean = new ComplaintBean();
+
+				bean.setId(rs.getInt(1));
+				bean.setUser_name(rs.getString(2));
+				bean.setComplaint_type(rs.getString(3));
+				bean.setDescription(rs.getString(4));
+				bean.setStatus(rs.getString(5));
+				bean.setEmail(rs.getString(6));
+			}
+
+			conn.commit();
+			pstmt.close();
+
+		} catch (Exception e) {
+			conn.rollback();
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+
+		return bean;
 	}
 
 	public ComplaintBean FindByEmail(String email) throws Exception {
@@ -220,6 +258,5 @@ public class ComplaintModel {
 		}
 
 		return list;
-
 	}
 }
