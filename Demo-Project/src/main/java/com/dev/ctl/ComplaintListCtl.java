@@ -10,25 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dev.bean.SchedulerJobBean;
-import com.dev.model.SchedulerJobModel;
+import com.dev.bean.ComplaintBean;
+import com.dev.model.ComplaintModel;
 
-@WebServlet("/SchedulerJobListCtl")
-public class SchedulerJobListCtl extends HttpServlet {
+@WebServlet("/ComplaintListCtl")
+public class ComplaintListCtl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		SchedulerJobBean bean = new SchedulerJobBean();
-		SchedulerJobModel model = new SchedulerJobModel();
+		ComplaintBean bean = new ComplaintBean();
+		ComplaintModel model = new ComplaintModel();
 
 		int pageNo = 1;
 		int pageSize = 5;
 
 		try {
-			List<SchedulerJobBean> list = model.search(bean, pageNo, pageSize);
-			List<SchedulerJobBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
+			List<ComplaintBean> list = model.search(bean, pageNo, pageSize);
+			List<ComplaintBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
 
 			request.setAttribute("pageNo", pageNo);
 			request.setAttribute("list", list);
@@ -38,23 +38,26 @@ public class SchedulerJobListCtl extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("SchedulerJobListView.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("ComplaintListView.jsp");
 		rd.forward(request, response);
+
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String op = request.getParameter("operation");
-		System.out.println(op);
-		SchedulerJobBean bean = new SchedulerJobBean();
-		SchedulerJobModel model = new SchedulerJobModel();
-
 		int pageNo = 1;
 		int pageSize = 5;
+		String op = request.getParameter("operation");
+		System.out.println(op);
 
-		String ids[] = request.getParameterValues("ids");
+		ComplaintBean bean = new ComplaintBean();
+		ComplaintModel model = new ComplaintModel();
+
+		
+
+		 String ids[] = request.getParameterValues("ids");
 
 		if (op.equals("next")) {
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
@@ -64,10 +67,12 @@ public class SchedulerJobListCtl extends HttpServlet {
 			pageNo = Integer.parseInt(request.getParameter("pageNo"));
 			pageNo--;
 		}
+		
+		
 		if (op.equals("delete")) {
 			if (ids != null && ids.length > 0) {
 				for (String id : ids) {
-					SchedulerJobBean jobBean = new SchedulerJobBean();
+					ComplaintBean jobBean = new ComplaintBean();
 					jobBean.setId(Integer.parseInt(id));
 					try {
 						model.delete(jobBean);
@@ -78,11 +83,12 @@ public class SchedulerJobListCtl extends HttpServlet {
 				}
 			} else {
 				request.setAttribute("errorMsg", "Select atleast one record");
-			}
-		}
+			}}
+		
+		
 		try {
-			List<SchedulerJobBean> list = model.search(bean, pageNo, pageSize);
-			List<SchedulerJobBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
+			List<ComplaintBean> list = model.search(bean, pageNo, pageSize);
+			List<ComplaintBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
 
 			request.setAttribute("pageNo", pageNo);
 			request.setAttribute("list", list);
@@ -92,7 +98,7 @@ public class SchedulerJobListCtl extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("SchedulerJobListView.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("ComplaintListView.jsp");
 		rd.forward(request, response);
 	}
 

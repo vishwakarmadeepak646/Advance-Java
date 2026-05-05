@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.dev.bean.SchedulerJobBean;
-import com.dev.ctl.SchedulerJobModel;
 import com.dev.exception.DuplicateRecodExcepiton;
+import com.dev.model.SchedulerJobModel;
 
 public class SchedulerJobTest {
 

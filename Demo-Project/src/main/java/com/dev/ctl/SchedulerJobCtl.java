@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dev.bean.SchedulerJobBean;
+import com.dev.model.SchedulerJobModel;
 
 @WebServlet("/SchedulerJobCtl")
 public class SchedulerJobCtl extends HttpServlet {
