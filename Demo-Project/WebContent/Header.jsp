@@ -31,6 +31,8 @@
 
 	<a href="UserRegistrationCtl"> User Registration |</a>
 	<a href="LoginCtl"> User Login | </a>
+	<a href="SchedulerJobCtl"> Job Scheduler Portal</a>
+	<a href="SchedulerJobListCtl">Job Scheduler List</a>
 	<%
 	}
 	%>

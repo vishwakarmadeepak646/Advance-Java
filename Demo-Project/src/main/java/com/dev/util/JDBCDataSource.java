@@ -1,7 +1,9 @@
 package com.dev.util;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
@@ -69,5 +71,32 @@ public class JDBCDataSource {
 			return null;
 		}
 	}
+	
+	// Close connection
+
+		public static void closeConnection(Connection conn, Statement stmt, ResultSet rs) {
+			try {
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// Close connection
+
+		public static void closeConnection(Connection conn, Statement stmt) {
+			closeConnection(conn, stmt, null);
+		}
+
+		// Close connection
+
+		public static void closeConnection(Connection conn) {
+			closeConnection(conn, null, null);
+		}
 
 }

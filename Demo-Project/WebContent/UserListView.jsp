@@ -37,8 +37,8 @@
 			<%
 			if (list.size() == 0) {
 			%>
-			<!--  	<h1 style="color: red">Record Not found</h1>
-			<input type="submit" name="operation" value="back">-->
+				<h1 style="color: red">Record Not found</h1>
+			<!--  <input type="submit" name="operation" value="back">-->
 			<%
 			} else {
 			%>

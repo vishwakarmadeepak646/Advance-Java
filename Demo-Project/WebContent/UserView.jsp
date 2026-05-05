@@ -22,8 +22,7 @@
 		<h1><%=bean != null ? "Update User" : "Add User"%></h1>
 
 		<h3 style="color: green"><%=successMsg != null ? successMsg : ""%></h3>
-		<h3 style="color: red">
-			<%=errorMsg != null ? errorMsg : ""%>
+		<h3 style="color: red"> <%=errorMsg != null ? errorMsg : ""%>
 		</h3>
 
 
