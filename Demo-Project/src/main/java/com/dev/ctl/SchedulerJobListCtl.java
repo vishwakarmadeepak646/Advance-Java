@@ -80,6 +80,9 @@ public class SchedulerJobListCtl extends HttpServlet {
 				request.setAttribute("errorMsg", "Select atleast one record");
 			}
 		}
+		if (op.equalsIgnoreCase("search")) {
+			bean.setName(request.getParameter("name"));
+		}
 		try {
 			List<SchedulerJobBean> list = model.search(bean, pageNo, pageSize);
 			List<SchedulerJobBean> Nextlist = model.search(bean, pageNo + 1, pageSize);
