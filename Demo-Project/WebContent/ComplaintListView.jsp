@@ -26,9 +26,20 @@
 
 
 		<h1>Complaint List</h1>
+
+
 		<form action="ComplaintListCtl" method="post">
-		
-		<input type="hidden" name="pageNo" value="<%=pageNo%>">
+
+			<input type="hidden" name="pageNo" value="<%=pageNo%>">
+
+
+			<!-- Search Filter -->
+
+			<div align="center">
+				<input type="text" name="name" placeholder="Search using Name"
+					value=<%=request.getParameter("name") != null ? request.getParameter("name") : ""%>>
+				<input type="submit" name="operation" value="search">
+			</div>
 
 			<h2 style="color: green"><%=successMsg != null ? successMsg : ""%></h2>
 			<h2 style="color: red"><%=errorMsg != null ? errorMsg : ""%></h2>
@@ -67,19 +78,19 @@
 					%>
 				</table>
 				<div>
-				<table width="100%">
-					<tr>
-						<td><input type="submit" name="operation"
-							<%=pageNo == 1 ? "disabled" : ""%> value="previous"></td>
+					<table width="100%">
+						<tr>
+							<td><input type="submit" name="operation"
+								<%=pageNo == 1 ? "disabled" : ""%> value="previous"></td>
 
-						<td><input type="submit" name="operation" value="delete"></td>
+							<td><input type="submit" name="operation" value="delete"></td>
 
 
-						<td align="right"><input type="submit" name="operation"
-							<%=Nextlist.size() == 0 ? "disabled" : ""%> value="next"></td>
-					</tr>
-				</table>
-			</div>
+							<td align="right"><input type="submit" name="operation"
+								<%=Nextlist.size() == 0 ? "disabled" : ""%> value="next"></td>
+						</tr>
+					</table>
+				</div>
 		</form>
 </body>
 </html>

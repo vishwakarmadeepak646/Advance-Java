@@ -85,6 +85,10 @@ public class ComplaintListCtl extends HttpServlet {
 				request.setAttribute("errorMsg", "Select atleast one record");
 			}}
 		
+		if(op.equalsIgnoreCase("search")) {
+			bean.setUser_name(request.getParameter("name"));
+		}
+		
 		
 		try {
 			List<ComplaintBean> list = model.search(bean, pageNo, pageSize);
