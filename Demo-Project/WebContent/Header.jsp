@@ -33,8 +33,9 @@
 	<a href="LoginCtl"> User Login | </a>
 	<a href="SchedulerJobCtl"> Job Scheduler Portal</a>
 	<a href="SchedulerJobListCtl">Job Scheduler List</a> |
-	<a href="ComplaintCtl">Complaint Registration</a> | 
-	<a href="ComplaintListCtl">Complaint List </a> | 
+	<a href="ComplaintCtl">Complaint Registration</a> |
+	<a href="ComplaintListCtl">Complaint List </a> |
+	<a href="EmployeeCtl"> Add Employee </a> |
 	<%
 	}
 	%>
