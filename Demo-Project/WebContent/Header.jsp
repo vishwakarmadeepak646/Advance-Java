@@ -36,6 +36,7 @@
 	<a href="ComplaintCtl">Complaint Registration</a> |
 	<a href="ComplaintListCtl">Complaint List </a> |
 	<a href="EmployeeCtl"> Add Employee </a> |
+	<a href="EmployeeListCtl"> Employee List </a> |
 	<%
 	}
 	%>

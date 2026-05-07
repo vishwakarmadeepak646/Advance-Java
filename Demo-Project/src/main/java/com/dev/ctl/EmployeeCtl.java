@@ -19,6 +19,22 @@ public class EmployeeCtl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		EmployeeBean bean = new EmployeeBean();
+		EmployeeModel model = new EmployeeModel();
+
+		String id = request.getParameter("id");
+
+		if (id != null) {
+
+			try {
+				bean = model.findByPk(Integer.parseInt(id));
+				request.setAttribute("bean", bean);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("EmployeeView.jsp");
 		rd.forward(request, response);
 	}
@@ -44,6 +60,15 @@ public class EmployeeCtl extends HttpServlet {
 			bean.setEmail(email);
 
 			System.out.println("Current Operation" + op);
+
+			if (op.equals("update")) {
+
+				bean.setId(Integer.parseInt(request.getParameter("id")));
+				model.update(bean);
+				request.setAttribute("successMsg", "Job Updated Successfully");
+				request.setAttribute("bean", bean);
+			}
+
 			model.add(bean);
 			request.setAttribute("successMsg", "Data added successfully");
 
