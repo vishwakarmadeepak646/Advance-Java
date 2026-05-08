@@ -67,10 +67,10 @@ public class EmployeeCtl extends HttpServlet {
 				model.update(bean);
 				request.setAttribute("successMsg", "Job Updated Successfully");
 				request.setAttribute("bean", bean);
-			}
+			}else {
 
 			model.add(bean);
-			request.setAttribute("successMsg", "Data added successfully");
+			request.setAttribute("successMsg", "Data added successfully");}
 
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", e.getMessage());

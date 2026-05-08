@@ -36,6 +36,14 @@
 			<h3 style="color: red">
 				<%=errorMsg != null ? errorMsg : ""%></h3>
 
+			<table>
+				<tr>
+					<td><input type="text" name="name"
+						value="<%=request.getParameter("name") != null ? request.getParameter("name") : ""%>"
+						placeholder="Search using Name"></td>
+					<td><input type="submit" name="operation" value="search"></td>
+				</tr>
+			</table>
 			<input type="hidden" name="pageNo" value="<%=pageNo%>">
 			<!-- To provide current pageNo in post Method -->
 

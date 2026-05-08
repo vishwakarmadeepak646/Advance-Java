@@ -86,6 +86,11 @@ public class EmployeeListCtl extends HttpServlet {
 			}
 			}
 		
+		if(op.equals("search")) {
+			
+			bean.setName(request.getParameter("name"));
+		}
+		
 
 		try {
 
